@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript">
+        document.documentElement.style.fontSize=document.documentElement.clientWidth/10+"px";
+    </script>
+    <link rel="stylesheet" type="" href="dist/css/iconfont.css">
+    <link rel="stylesheet" type="" href="dist/css/music.css">
+</head>
+<body>
+    <div class="c-content">
+        <p><a href="music.html"> < </a>银行卡管理</p>
+        <div class="main main1">
+            <div class="floor2 clearfix">
+                <img class="fl" src="src/img/1.png" alt="">
+                <div class="fl div1">
+                    <p class="bank">招商银行</p>
+                    <p class="p1">储蓄卡</p>
+                    <p class="p2">1234<span>5678</span>1345<i>1234</i></p>
+                </div>
+            </div>
+        </div>
+        <a href="addcard.html">+ 添加银行卡</a>
+        <div class="modal">
+            <div class="box">
+                <p>确定删除吗？</p>
+                <div class="option clearfix">
+                    <p class="fl">取消</p>
+                    <p class="fr">确认</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    var main=document.querySelector(".main1");
+    var bank=document.querySelector(".bank");
+    var p2=document.querySelector(".p2");
+    var bk=sessionStorage.getItem("text");
+    var cn=sessionStorage.getItem("cardnumber");
+    if(bk != null){
+        if(bk==="交通银行"){
+            var str='';
+            str ='<div class="floor2 clearfix"><img class="fl" src="src/img/2.jpg"><div class="fl div1"><p class="bank">'+
+                    bk+'</p><p class="p1">储蓄卡</p><p class="p2">'+cn+'</p></div></div>';
+            main.innerHTML+=str;
+            var floor2=document.getElementsByClassName("floor2")[1];
+            console.log(floor2);
+            floor2.style.background="#1765a3 no-repeat";
+            floor2.style.backgroundImage="url(src/img/3.jpg)";
+            floor2.style.backgroundSize="3.4rem";
+            floor2.style.backgroundPosition="5.2rem";
+        }else{
+            var str='';
+            str ='<div class="floor2 clearfix"><img class="fl" src="src/img/1.png"><div class="fl div1"><p class="bank">'+
+                    bk+'</p><p class="p1">储蓄卡</p><p class="p2">'+cn+'</p></div></div>';
+            main.innerHTML+=str;
+        }
+    }
+    //删除银行卡
+    var dlt=document.getElementsByClassName("floor2");
+    var modal=document.getElementsByClassName("modal")[0];
+    var fl=document.querySelector(".option .fl");
+    var fr=document.querySelector(".option .fr");
+    for(var i=0;i<dlt.length;i++){
+        dlt[i].index=i;
+        dlt[i].onclick=function(){
+            var index=this.index;
+            console.log(index);
+            modal.style.display="block";
+            fl.onclick=function(){
+                modal.style.display="none";
+            } 
+            fr.onclick=function(){
+                dlt[index].style.display="none";
+                modal.style.display="none";
+            }  
+        }
+    }
+
+
+    </script>
+</body>
+</html>

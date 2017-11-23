@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript">
+        document.documentElement.style.fontSize=document.documentElement.clientWidth/10+"px";
+    </script>
+    <link rel="stylesheet" type="" href="dist/css/iconfont.css">
+    <link rel="stylesheet" type="" href="dist/css/music.css">
+</head>
+<body>
+    <div class="a-content">
+        <header>
+            <p><a href="card.html"> < </a>添加银行卡</p>
+        </header> 
+        <div class="main">
+            <p>请绑定持卡人本人的银行卡</p>
+            <div class="card">
+                <div class="user clearfix bk">
+                    <p class="fl">银行</p>
+                    <p class="fr bank"><span class="opt">请选择银行</span><i class="iconfont icon-unfold"></i></p>
+                    <div class="list">
+                        <p>招商银行</p>
+                        <p>交通银行</p>
+                    </div>
+                </div>
+                <div class="user clearfix">
+                    <p class="fl">持卡人</p>
+                    <input class="fr cardholder" type="text">
+                </div>
+                <div class="user clearfix">
+                    <p class="fl">卡号</p>
+                    <input class="fr cardnumber" type="text">
+                </div>
+            </div>
+            <a class="hold">保存</a>
+        </div>
+        <div class="cue"></div> 
+    </div>
+    <script>
+    //下拉框
+    var bank=document.querySelector(".bank");
+    var list=document.querySelector(".list");
+    var opt=document.querySelector(".opt");
+    var p=document.querySelectorAll(".list>p");
+    sessionStorage.setItem("text",opt.innerHTML);
+    //选择银行
+    bank.onclick=function(){
+        list.style.display="block";
+        for(var i=0;i<p.length;i++){
+            p[i].index=i;
+            p[i].onclick=function(){
+                list.style.display="none";
+                opt.innerHTML=this.innerHTML;
+                var text=opt.innerHTML;
+                sessionStorage.setItem("text",text);
+            }
+        }
+    }
+    opt.innerHTML=sessionStorage.getItem("text");
+    //持卡人
+    var ch=document.querySelector(".cardholder");
+    ch.onchange=function(){
+        var chv=ch.value;
+        sessionStorage.setItem("cardholder",chv);
+    }
+    //卡号
+    var cn=document.querySelector(".cardnumber");
+    cn.onchange=function(){
+        var cnv=cn.value;
+        sessionStorage.setItem("cardnumber",cnv);
+    }
+    //验证
+    var reg2=/\d{16}$/,
+        reg1=/^([a-zA-Z0-9\u4e00-\u9fa5\·]{2,10})$/;
+    var btn=document.querySelector(".hold");
+    var cue=document.querySelector(".cue");
+    btn.onclick=function(){
+        var a=sessionStorage.getItem("text");
+        console.log(a);
+        if(a==="请选择银行"){
+            cue.className="cue active";
+            cue.innerHTML="请选择银行";
+        }else{
+            if(ch.value === ""){
+                cue.className="cue active";
+                cue.innerHTML="请填写持卡人";
+            }else{
+                if(cn.value === ""){
+                    cue.className="cue active";
+                    cue.innerHTML="请填写卡号";
+                }else{
+                    if(reg1.test(ch.value)){
+                        if(reg2.test(cn.value)){
+                            location.href="card.html";
+                        }else{
+                            cue.className="cue active";
+                            cue.innerHTML="请填写正确的银行卡卡号";
+                        }
+                    }else{
+                        cue.className="cue active";
+                        cue.innerHTML="请填写有效姓名";
+                    }
+                }
+            }
+        }
+    }
+
+    </script>
+</body>
+</html>

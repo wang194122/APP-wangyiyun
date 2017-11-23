@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript">
+        document.documentElement.style.fontSize=document.documentElement.clientWidth/10+"px";
+    </script>
+    <link rel="stylesheet" type="" href="dist/css/music.css">
+</head>
+<body>
+    <div class="a-content">
+        <header class="clearfix">
+            <p class="fl"><a href="address.html"> < </a>添加新地址</p>
+            <a class="fr keep">保存</a>
+        </header> 
+        <div class="main">
+            <div class="repeat clearfix">
+                <span class="fl">收货人</span>
+                <input class="fr user" type="text">
+            </div>
+            <div class="repeat clearfix">
+                <span class="fl">联系电话</span>
+                <input class="fr phone" type="text">
+            </div>
+            <div class="repeat clearfix">
+                <span class="fl">所在地区</span>
+                <input class="fr ipt3" type="text">
+            </div>
+            <input class="ipt4" type="text" placeholder="详细地址">
+        </div> 
+        <div class="modal">
+            <div class="a-cue">
+                <p class="point">请填写正确的手机号码</p>
+                <span class="fr confirm">确定</span>
+            </div>
+        </div>
+    </div>
+    <script>
+    var keep=document.getElementsByClassName("keep")[0];
+    var ipt1=document.getElementsByClassName("user")[0];
+    var ipt2=document.getElementsByClassName("phone")[0];
+    var ipt3=document.getElementsByClassName("ipt3")[0];
+    var ipt4=document.getElementsByClassName("ipt4")[0];
+    var reg2=/^1\d{10}$/;
+    var reg1= /^([a-zA-Z0-9\u4e00-\u9fa5\·]{2,10})$/;
+    var modal=document.getElementsByClassName("modal")[0];
+    var confirm=document.getElementsByClassName("confirm")[0];
+    var point=document.getElementsByClassName("point")[0];
+    console.log(ipt1);
+    //点击保存判断
+    keep.onclick=function(e){
+        if(ipt1.value === ""){
+            modal.className = "modal active";
+            point.innerHTML="请输入姓名";
+        }else{
+            if(ipt2.value === ""){
+                modal.className = "modal active";
+                point.innerHTML="请输入手机号";
+            }else{
+                if(ipt3.value === ""){
+                    modal.className = "modal active";
+                    point.innerHTML="请输入地址";
+                }else{
+                    if(ipt4.value === ""){
+                        modal.className = "modal active";
+                        point.innerHTML="请输入详细地址";
+                    }else{
+                        var iv1=ipt1.value;
+                        if(reg1.test(iv1)){
+                            var iv2=ipt2.value;
+                            if(reg2.test(iv2)){
+                                var iv3=ipt3.value;
+                                var iv4=ipt4.value;
+                                location.href="address.html";
+                                sessionStorage.setItem("user",iv1);
+                                sessionStorage.setItem("phone",iv2);
+                                sessionStorage.setItem("address",iv3);
+                                sessionStorage.setItem("address1",iv4);
+                            }else{
+                                modal.className = "modal active";
+                                point.innerHTML="请输入正确的手机号";
+                            }
+                        }else{
+                            modal.className = "modal active";
+                            point.innerHTML="姓名：2-10个字符限制";
+                        }
+                    }  
+                } 
+            }
+        }
+        
+    }
+    //点击确定隐藏模态框
+   
+    confirm.onclick=function(){
+        modal.className = "modal";
+    }
+   
+    modal.onclick=function(e){
+        e=e||window.event;
+        if(e.target.className === "modal active"){
+            modal.className = "modal";
+        }
+    }
+    </script>
+</body>
+</html>

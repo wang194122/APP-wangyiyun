@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript">
+        document.documentElement.style.fontSize=document.documentElement.clientWidth/10+"px";
+    </script>
+    <link rel="stylesheet" type="" href="dist/css/music.css">
+</head>
+<body>
+    <div class="l-content">
+        <p><a href="music.html"> < </a>手机号注册</p>
+        <div class="form">
+            <div class="user">
+                <label for="username">+86</label>
+                <input type="text" name="username" id="username" placeholder="请输入用户名">
+            </div>
+            <div class="suo">
+                <label for="password"></label>
+                <input type="password" name="password" id="password" placeholder="请输入密码">
+                <span>忘记密码?</span>
+            </div>
+            <div class="btn">
+                <input type="submit" value="下一步">
+            </div>
+        </div>
+        <div class="cue"></div>
+    </div>
+    <script>
+    //注册
+    var l_btn=document.querySelector(".l-content .btn input");
+    var l_cue=document.querySelector(".l-content .cue");
+    var ipt1=document.querySelector(".user input");
+    var ipt2=document.querySelector(".suo input");
+    console.log(l_btn);
+    var reg1=/^1\d{10}$/,
+        reg2=/\w{6,20}/;
+
+    l_btn.onclick=function(){
+        if(ipt1.value === ""){
+            l_cue.className="cue active";
+            l_cue.innerHTML="请输入手机号";
+        }else{
+            if(ipt2.value === ""){
+                l_cue.className="cue active";
+                l_cue.innerHTML="请输入密码";
+            }else{
+                if(reg1.test(ipt1.value)){
+                    if(reg2.test(ipt2.value)){
+                        location.href="validata.html";  
+                        setCookie("username", username.value, 7);
+                    }else{
+                        l_cue.className="cue active";
+                        l_cue.innerHTML="请输入6位或以上的密码";
+                    }
+                }else{
+                    l_cue.className="cue active";
+                    l_cue.innerHTML="请输入11位数字的手机号";
+                }
+            }
+        }
+    }
+    /*---设置cookie---*/
+    function setCookie(key, value, time){
+        var date = new Date()
+        date.setDate(date.getDate() + time) // 当前时间 + 30天
+        document.cookie = key + "=" + encodeURIComponent(value) + ";expires=" + date
+    }
+    </script>
+</body>
+</html>

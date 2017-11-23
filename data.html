@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript">
+        document.documentElement.style.fontSize=document.documentElement.clientWidth/10+"px";
+    </script>
+    <link rel="stylesheet" type="" href="dist/css/iconfont.css">
+    <link rel="stylesheet" type="" href="dist/css/music.css">
+</head>
+<body>
+    <div class="d-content">
+        <div class="top">
+            <div class="head clearfix">
+                <a class="fl" href="music.html"> < </a>
+                <i class="fr iconfont icon-share"></i>
+            </div>
+            <div class="pt">
+                <div class="circle">
+                    <img src="src/img/7.jpg" alt="">
+                </div>
+                <p class="name">wang194122</p>
+                <a href="mydata.html"><i class="iconfont icon-brush"></i>我的资料</a>
+            </div>
+        </div>
+        <div class="main">
+            <p>个人信息</p>
+            <div class="news">
+                <p class="p1">地区：<i class="i1">山西太原</i></p>
+                <p class="p2">性别：<i class="i2">女</i></p>
+                <p class="p3">生日：<i class="i3">1994-12-02</i></p>
+                <p class="p4">大学：<i class="i4">山西大学</i></p>
+            </div>
+            <p>个人介绍</p>
+            <div class="present">
+                <p class="i5">还没有填写个人介绍</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        //头像
+        var pics=document.querySelector(".pt img");
+        if(!sessionStorage.getItem("pic")){
+            pics.src="http://p1.music.126.net/J0EU9E-h9l0YNQnG2yYJ7g==/109951163033232542.webp?imageView&thumbnail=246x0&quality=75&tostatic=0&type=webp";
+        }else{
+            pics.src=sessionStorage.getItem("pic");
+        }
+        //昵称
+        var nm=document.querySelector(".name");
+        console.log(nm);
+        if(!sessionStorage.getItem("name")){
+            nm.innerHTML=getCookie("username");
+        }else{
+            nm.innerHTML=sessionStorage.getItem("name");
+        }
+        //获取cookie
+        function getCookie(key){
+            var _cookie = document.cookie;	//username=wally; age=17; sex=man
+            var arr = _cookie.split(";");
+            for(var i=0;i<arr.length;i++){
+                if(arr[i].split("=")[0].trim() === key){
+                    return arr[i].split("=")[1]
+                }
+            }
+        }
+        //背景图
+        var tops=document.querySelector(".top"); 
+        if(!sessionStorage.getItem("pic2")){
+            tops.style.backgroundImage='url(http://img1.imgtn.bdimg.com/it/u=1769181433,1179787488&fm=27&gp=0.jpg)';
+        }else{
+            var ul=sessionStorage.getItem("pic2");
+            tops.style.backgroundImage='url('+ul+')';
+        }
+        //地区
+        var i1=document.querySelector(".i1"); 
+        var p1=document.querySelector(".p1");
+        if(!sessionStorage.getItem("area")){
+            p1.style.display="none";
+        }else{
+            i1.innerHTML=sessionStorage.getItem("area");
+        }
+        //性别
+        var i2=document.querySelector(".i2"); 
+        var p2=document.querySelector(".p2");
+        if(!sessionStorage.getItem("sex")){
+            p2.style.display="none";
+        }else{
+            i2.innerHTML=sessionStorage.getItem("sex");
+        }
+        //生日
+        var i3=document.querySelector(".i3"); 
+        var p3=document.querySelector(".p3");
+        if(!sessionStorage.getItem("data")){
+            p3.style.display="none";
+        }else{
+            i3.innerHTML=sessionStorage.getItem("data");
+        }
+        //大学
+        var i4=document.querySelector(".i4"); 
+        var p4=document.querySelector(".p4");
+        if(!sessionStorage.getItem("school")){
+            p4.style.display="none";
+        }else{
+            i4.innerHTML=sessionStorage.getItem("school");
+        }
+        //个人介绍
+        var i5=document.querySelector(".i5"); 
+        if(!sessionStorage.getItem("summary")){
+            i5.innerHTML="还没有填写个人介绍";
+        }else{
+            i5.innerHTML=sessionStorage.getItem("summary");
+        }
+    </script>
+</body>
+</html>

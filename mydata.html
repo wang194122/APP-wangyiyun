@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript">
+        document.documentElement.style.fontSize=document.documentElement.clientWidth/10+"px";
+    </script>
+    <link rel="stylesheet" type="text/css" href="dist/css/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="dist/css/music.css">
+    <link rel="stylesheet" href="dist/css/normalize3.0.2.min.css" />
+    <link rel="stylesheet" href="dist/css/style.css?v=7" />
+    <link href="dist/css/mobiscroll.css" rel="stylesheet" />
+    <link href="dist/css/mobiscroll_date.css" rel="stylesheet" />
+</head>
+<body style="background:#ededef;">
+    <div class="m-content">
+        <header>
+            <a href="data.html"> < </a>我的资料
+        </header> 
+        <div class="main">
+            <div class="floor1">
+                <div class="repeat clearfix">
+                    <span class="fl">头像</span>
+                    <div class="circle fr">
+                        <img class="img1" src="http://p1.music.126.net/J0EU9E-h9l0YNQnG2yYJ7g==/109951163033232542.webp?imageView&thumbnail=246x0&quality=75&tostatic=0&type=webp" alt="">
+                        <input type="file" name="" id="file" value="" />
+                    </div>
+                </div>
+                <div class="repeat clearfix">
+                    <span class="fl">个人主页背景</span>
+                    <div class="fr div3">
+                        <img class="img2" src="http://p1.music.126.net/J0EU9E-h9l0YNQnG2yYJ7g==/109951163033232542.webp?imageView&thumbnail=246x0&quality=75&tostatic=0&type=webp" alt="">
+                        <input class="" type="file" name="" id="file" value="" />
+                    </div>
+                </div>
+                <div class="repeat clearfix">
+                    <span class="fl">昵称</span>
+                    <input class="fr name" type="text" placeholder="请填写">
+                </div>
+                <div class="repeat clearfix">
+                    <span class="fl">性别</span>
+                    <p class="fr p1">请选择</p>
+                    <div class="modal">
+                        <div class="sex">
+                            <p class="clearfix">
+                               <span class="fl man">男</span>
+                               <i class="i1 fr iconfont icon-right"></i>
+                            </p>
+                            <p class="clearfix">
+                                <span class="fl men">女</span>
+                                <i class="i2 fr iconfont icon-right"></i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="repeat clearfix">
+                    <span class="fl">二维码</span>
+                    <i class="fr iconfont icon-qrcode"></i>
+                </div>
+            </div>
+            <div class="floor1">
+                <div class="repeat clearfix">
+                    <span class="fl">生日</span>
+                    <input class="fr" type="text" name="USER_AGE" id="USER_AGE" readonly class="input" placeholder="请选择" />
+                </div>
+                <div class="repeat clearfix">
+                    <span class="fl">地区</span>
+                    <input class="fr area" type="text" placeholder="请填写">
+                </div>
+                <div class="repeat clearfix">
+                    <span class="fl">大学</span>
+                    <input class="fr school" type="text" placeholder="请填写">
+                </div>
+            </div>
+            <p>此三项可以在“设置”页中设为隐私</p>
+            <div class="floor1 floor2">
+                <div class="repeat clearfix">
+                    <span class="fl">签名</span>
+                    <input class="fr summary" type="text" placeholder="还没有签名">
+                </div>
+            </div>
+        </div> 
+    </div>
+    <script src="dist/js/jquery.min.js"></script>
+    <script src="dist/js/mobiscroll_date.js" charset="gb2312"></script> 
+    <script src="dist/js/mobiscroll.js"></script> 
+    <script>
+        //存头像
+        var fileBtn = document.querySelector('.circle input'),
+		        img = document.querySelector('.img1');
+        fileBtn.onchange = function(){
+            var fd = new FileReader();
+            // readAsDataURL  将()中的文件 读成base64
+            fd.readAsDataURL(this.files[0])
+            fd.onload = function(e) {
+                var pic=e.target.result;
+                img.src=pic;
+                sessionStorage.setItem("pic",pic);
+            }
+        }
+        if(!sessionStorage.getItem("pic")){
+            img.src="http://p1.music.126.net/J0EU9E-h9l0YNQnG2yYJ7g==/109951163033232542.webp?imageView&thumbnail=246x0&quality=75&tostatic=0&type=webp";
+        }else{
+            img.src=sessionStorage.getItem("pic");
+        }
+        
+        //存背景
+        var div3= document.querySelector('.div3 input'),
+		        img2 = document.querySelector('.img2');
+        div3.onchange = function(){
+            var fd = new FileReader();
+            // readAsDataURL  将()中的文件 读成base64
+            fd.readAsDataURL(this.files[0])
+            fd.onload = function(e) {
+                var pic2=e.target.result;
+                img2.src=pic2;
+                sessionStorage.setItem("pic2",pic2);
+            }
+        }
+        if(!sessionStorage.getItem("pic2")){
+            img2.src=='url(http://img1.imgtn.bdimg.com/it/u=1769181433,1179787488&fm=27&gp=0.jpg)';
+        }else{
+            img2.src=sessionStorage.getItem("pic2");
+        }
+        //存昵称
+        var nm=document.getElementsByClassName("name")[0];
+        nm.onchange=function(){
+            var nv=nm.value;
+            sessionStorage.setItem("name",nv);
+        }
+        nm.value=sessionStorage.getItem("name");
+        //存性别
+        var modal=document.querySelector(".modal"),
+            p1=document.querySelector(".p1"),
+            p=document.querySelectorAll(".sex p"),
+            is=document.querySelectorAll(".sex i"),
+            span=document.querySelectorAll(".sex span");
+        p1.onclick=function(){
+            modal.style.display="block";
+        }
+        for(var i=0;i<p.length;i++){
+            p[i].index=i;
+            p[i].onclick=function(){
+                for(var j=0;j<p.length;j++){
+                    is[j].style.display="none";
+                }
+                is[this.index].style.display="block";
+                modal.style.display="none";
+                var str=span[this.index].innerText;
+                p1.innerHTML=str;
+                sessionStorage.setItem("sex",str);
+            }
+        }
+        if(!sessionStorage.getItem("sex")){
+            p1.innerHTML="请选择";
+        }else{
+            p1.innerHTML=sessionStorage.getItem("sex");
+        }
+        //存生日
+        var data=document.getElementById("USER_AGE");
+        data.onchange=function(){
+            var dv=data.value;
+            sessionStorage.setItem("data",dv);
+        }
+        data.value=sessionStorage.getItem("data");
+        //存地区
+        var area=document.querySelector(".area");
+        area.onchange=function(){
+            var av=area.value;
+            sessionStorage.setItem("area",av);
+        }
+        area.value=sessionStorage.getItem("area");
+        //存大学
+        var school=document.querySelector(".school");
+        school.onchange=function(){
+            var sv=school.value;
+            sessionStorage.setItem("school",sv);
+        }
+        school.value=sessionStorage.getItem("school");
+        //存签名
+        var summary=document.querySelector(".summary");
+        summary.onchange=function(){
+            var smv=summary.value;
+            sessionStorage.setItem("summary",smv);
+        }
+        summary.value=sessionStorage.getItem("summary");
+
+        //日期
+        $(function () {
+            var currYear = (new Date()).getFullYear();	
+            var opt={};
+            opt.date = {preset : 'date'};
+            opt.datetime = {preset : 'datetime'};
+            opt.time = {preset : 'time'};
+            opt.default = {
+                theme: 'android-ics light', //皮肤样式
+                display: 'modal', //显示方式 
+                mode: 'scroller', //日期选择模式
+                dateFormat: 'yyyy-mm-dd',
+                lang: 'zh',
+                showNow: true,
+                nowText: "今天",
+                startYear: currYear - 50, //开始年份
+                endYear: currYear + 10 //结束年份
+            };
+        
+            $("#USER_AGE").mobiscroll($.extend(opt['date'], opt['default']));
+        
+        });
+        
+    </script>
+</body>
+</html>

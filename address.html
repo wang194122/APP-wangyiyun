@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript">
+        document.documentElement.style.fontSize=document.documentElement.clientWidth/10+"px";
+    </script>
+    <link rel="stylesheet" type="" href="dist/css/iconfont.css">
+    <link rel="stylesheet" type="" href="dist/css/music.css">
+</head>
+<body>
+    <div class="c-content">
+        <p><a href="music.html"> < </a>地址</p>
+        <div class="main">
+            <div class="floor1">
+                <p class="clearfix">
+                    <span class="fl">王田田</span>
+                    <span class="fr">15110304705</span>
+                </p>
+                <div class="location">
+                    山西省太原市尖草坪区新城幼儿园山西省太原市尖草坪区新城幼儿园
+                </div>
+                <div class="btm clearfix">
+                    <p class="fl"><i class="iconfont icon-success"></i>设为默认</p>
+                    <div class="fr">
+                        <span><i class="iconfont icon-editor"></i>编辑</span>
+                        <span class="dlt"><i class="iconfont icon-trash"></i>删除</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="add" href="add.html">+ 添加新地址</a>
+    </div>
+    <script>
+    var main=document.querySelector(".main");
+    var user=sessionStorage.getItem("user");
+    var phone=sessionStorage.getItem("phone");
+    var address=sessionStorage.getItem("address");
+    var address1=sessionStorage.getItem("address1");
+    var main=document.querySelector(".main");
+    var add=document.querySelector(".add");
+    
+    
+
+    if(user != null){
+        var str='';
+        str +='<div class="floor1"><p class="clearfix"><span class="fl">'+user+
+        '</span><span class="fr">'+phone+'</span></p><div class="location">'+address+address1+
+        '</div><div class="btm clearfix"><p class="fl"><i class="iconfont icon-success"></i>设为默认</p><div class="fr"><span><i class="iconfont icon-editor"></i>编辑</span><span class="dlt"><i class="iconfont icon-trash"></i>删除</span></div></div></div>';
+        main.innerHTML+=str;
+    }
+    
+
+    var dlt=document.getElementsByClassName("dlt");
+    var floor=document.querySelectorAll(".main>div");
+    console.log(floor);
+    //删除地址
+    for(var i=0;i<dlt.length;i++){
+        dlt[i].index=i;
+        dlt[i].onclick=function(){
+            floor[this.index].innerHTML="";
+        }
+    }
+
+    //设为默认
+    var success=document.querySelectorAll(".icon-success");
+    for(var i=0;i<success.length;i++){
+        success[i].index=i;
+        success[i].onclick=function(){
+            for(var j=0;j<success.length;j++){
+                success[j].className="iconfont icon-success";
+            }
+            this.className="iconfont icon-success_fill";
+        }
+    }
+    
+
+    </script>
+</body>
+</html>
